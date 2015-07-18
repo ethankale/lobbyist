@@ -1,0 +1,27 @@
+{
+  "name": "lobbyist",
+  "version": "0.0.1",
+  "description": "Game about political connections.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ethankale/lobbyist.git"
+  },
+  "author": "Nat Kale",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethankale/lobbyist/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~0.9.1"
+  },
+  "dependencies": {
+    "lodash": "~3.8.0",
+    "angularjs": "~1.3.15"
+  }
+}
