@@ -2,3 +2,7 @@
 
 node_modules
 bower_components
+
+# Directories things are built into
+.tmp
+dest
