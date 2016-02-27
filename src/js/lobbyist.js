@@ -33,17 +33,23 @@ function newPerson(firstName, lastName) {
 };
 
 
-// How many relationships does this person have?
-function relationshipCount(personID, relationships) {
+// Who is this person related to, and with what strength?
+function relationshipList(personID, relationships) {
     
-    var relationshipCount = 0;
+    var relations = [];
     
-    for (i=0; i<relationships.length; i++) {
-        relationshipCount += relationships[i].firstPerson == personID ? 1 : 0;
-        relationshipCount += relationships[i].secondPerson == personID ? 1 : 0;
+    for (var i=0; i<relationships.length; i++) {
+        
+        var isRelated = 0;
+        isRelated += relationships[i].firstPerson == personID ? 1 : 0;
+        isRelated += relationships[i].secondPerson == personID ? 1 : 0;
+        
+        if (isRelated > 0) {
+            relations.push([i, relationships[i].strength]);
+        };
     };
     
-    return relationshipCount;
+    return relations;
     
 };
 
@@ -59,8 +65,9 @@ for (var i=0; i<25; i++) {
 for (var i=0; i<people.length; i++) {
 
     var currentPerson = people[i];
-    var numberOfRelations = relationshipCount(i, relations);
+    var numberOfRelations = relationshipList(i, relations).length;
     
+    //console.log(i);
     
     for (var j=numberOfRelations; j<4; j++) {
         var secondPerson = Math.floor(Math.random() * people.length);
