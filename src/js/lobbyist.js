@@ -1,3 +1,6 @@
+//////////////////
+// Data Structures
+//////////////////
 
 // Two data structures - an array of entities (people),
 //   and an array of relationships.
@@ -5,7 +8,7 @@
 var people = [];
 var relations = [];
 
-function newPerson(firstName, lastName) {
+function newPerson(id, firstName, lastName) {
     
     // If no first and/or last name is supplied, randomly choose one
     var firstNames = ["Joe", "Jane", "Bob", "Rebecca", "Douglas", "Ursula",
@@ -28,7 +31,7 @@ function newPerson(firstName, lastName) {
     var numberOfRelations = Math.floor(((Math.random() + Math.random() + Math.random()) * 2) + 3)
     //
     
-    var person = {"first":first, "last":last, "opinion":opinion, "relations":numberOfRelations};
+    var person = {"id": id, "first":first, "last":last, "opinion":opinion, "relations":numberOfRelations};
     return person;
 };
 
@@ -56,7 +59,7 @@ function relationshipList(personID, relationships) {
 // Make people!
 for (var i=0; i<25; i++) {
     
-    people.push(newPerson());
+    people.push(newPerson(i));
     
 };
 
@@ -76,5 +79,35 @@ for (var i=0; i<people.length; i++) {
         relations.push( {"firstPerson":i, "secondPerson":secondPerson, "strength":strength} );
     };
 }
+
+////////////////
+// Make display!
+////////////////
+
+var r = 20;   //Radius of each circle
+
+var margin = {top: r*2, right: r*2, bottom: r*2, left: r*2};
+
+var w = (960 - margin.left - margin.right),  //Width of viewport
+    h = (500 - margin.top - margin.bottom),  //Height of veiwport
+    n = 5;   //Number of columns
+    
+var verticalSpace = h / (Math.ceil(people.length/n));
+var horizSpace = w / n;
+    
+    
+var svg = d3.select("body").append("svg")
+    .attr("width", w + margin.left + margin.right)
+    .attr("height", h + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.selectAll("circle")
+    .data(people)
+  .enter().append("circle")
+    .attr("cx", function(d) { return ((d.id % n) * horizSpace); })
+    .attr("cy", function(d) { return (Math.floor( (d.id) / n) * verticalSpace); })
+    .attr("data-id", function(d) { return d.id; })
+    .attr("r", r);
 
 
