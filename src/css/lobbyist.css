@@ -1,0 +1,11 @@
+
+.circle {
+    fill: #eee;
+    stroke: none;
+    
+}
+
+.initials {
+    text-anchor: middle;
+    dominant-baseline: central;
+}

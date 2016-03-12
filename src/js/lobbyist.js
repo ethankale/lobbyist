@@ -102,12 +102,25 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-svg.selectAll("circle")
+svg.selectAll(".circle")
     .data(people)
   .enter().append("circle")
+    .attr("class", "circle")
     .attr("cx", function(d) { return ((d.id % n) * horizSpace); })
     .attr("cy", function(d) { return (Math.floor( (d.id) / n) * verticalSpace); })
     .attr("data-id", function(d) { return d.id; })
     .attr("r", r);
+    
+svg.selectAll(".initials")
+    .data(people)
+  .enter().append("text")
+    .attr("class", "initials")
+    .attr("y", function(d) { return (Math.floor( (d.id) / n) * verticalSpace); })
+    .attr("x", function(d) { return ((d.id % n) * horizSpace); })
+    .attr("font-size", r + "px")
+    //.attr("text-anchor", "middle")
+    .text(function(d) { return d.first[0] + d.last[0]});
+
+
 
 
